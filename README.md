@@ -19,7 +19,7 @@ This is the backend for a To-Do application built using Node.js and Express. It 
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/DeFiDev-sys/To-Do_Backend.git
    cd Backend
    ```
 
