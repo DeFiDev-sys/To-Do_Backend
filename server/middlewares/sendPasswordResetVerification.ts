@@ -10,7 +10,7 @@ export const sendPasswordResetEmail = (resetToken: string, name: string, email: 
             <h1>Reset your password</h1>
                 <h3>Dear ${name}</h3>
                 <p>Click on the link to reset your password</p>
-                <a href="http://localhost:3000/reset-password?token=${resetToken}">Click Here!</a>
+                <a href="https://to-do-frontend-theta.vercel.app/reset-password?token=${resetToken}">Click Here!</a>
             </body>
         </html>
     `;
