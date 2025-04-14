@@ -91,7 +91,6 @@ const RequestPasswordReset = async (req:Request<{},{},ResquestPassword>,res:Resp
     }
     if(user){
       const resetToken = genResetToken(user._id);
-      console.log(resetToken)
       sendPasswordResetEmail(resetToken,user.name,user.email,);
       return res.status(200).json({ message: "Email sent successfully." })
     }
