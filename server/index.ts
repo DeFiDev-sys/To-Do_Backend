@@ -22,8 +22,8 @@ app.use(cookieParser());
 // Initialize DB
 connectDB();
 
-app.use("/auth",authrouter)
-app.use("/tasks",taskRouter)
+app.use("/api/auth",authrouter)
+app.use("/api/tasks",taskRouter)
 
 // Routes testing the api
 app.get('/', (req, res) => {
