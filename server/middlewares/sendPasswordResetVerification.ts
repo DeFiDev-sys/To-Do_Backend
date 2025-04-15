@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
-//abof derc vgrw fogz
-//juwonjay2001@gmail.com
+import dotenv from "dotenv";
+
+dotenv.config()
 
 
 export const sendPasswordResetEmail = (resetToken: string, name: string, email: string) =>{
@@ -18,8 +19,8 @@ export const sendPasswordResetEmail = (resetToken: string, name: string, email: 
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "juwonjay2001@gmail.com",
-      pass: "abof derc vgrw fogz",
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASS,
     },
   });
 
