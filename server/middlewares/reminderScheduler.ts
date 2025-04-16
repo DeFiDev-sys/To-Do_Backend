@@ -32,12 +32,12 @@ export const sendReminderEmails = async() =>{
         const user = task.user;
 
         const html = `
-            <html>
+             <html>
                 <body>
                     <h1>Reminder</h1>
-                    <p>Don't forget to do your task!, Dear ${user.name}</p>
-                    <p>Just a reminder for task: ${task.description}</p>
-                    <p>Reminder set for: ${task.reminderAt}</p>
+                    <p>Hi ${user.name}, don't forget your task!</p>
+                    <p><strong>${task.title}:</strong> ${task.description}</p>
+                    <p>Reminder time: ${task.reminderAt}</p>
                 </body>
             </html>
         `
@@ -56,4 +56,3 @@ export const sendReminderEmails = async() =>{
 
 
 cron.schedule("* * * * *", sendReminderEmails);
-
