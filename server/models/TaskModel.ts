@@ -7,6 +7,8 @@ const TaskSchema = new mongoose.Schema<ITask>(
     description: {type:String},
     status: { type: String, enum: ["todo", "in-progress", "done"], default: "todo" },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    reminderAt:{type:Date, default:null},
+    notified:{type:Boolean,default:false}
   },
   { timestamps: true }
 );

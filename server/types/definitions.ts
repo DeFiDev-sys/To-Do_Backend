@@ -43,7 +43,10 @@ export interface ITask extends Document {
   title: string;
   description?: string;
   status: 'todo' | 'in-progress' | 'done';
-  user: Types.ObjectId | IUser;
+  user:IUser;
+  reminderAt?:Date | null;
+  notified?:boolean;
+  save: () => Promise<void>;
   createdAt?: Date;
   updatedAt?: Date;
 }

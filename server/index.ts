@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import connectDB from './config/db';
 import { authrouter } from './routes/auths';
 import { taskRouter } from './routes/taskRoute';
+import { sendReminderEmails } from './middlewares/reminderScheduler';
 
 dotenv.config();
 
@@ -21,6 +22,8 @@ app.use(cookieParser());
 
 // Initialize DB
 connectDB();
+
+sendReminderEmails();//reminder for task via email
 
 app.use("/api/auth",authrouter)
 app.use("/api/tasks",taskRouter)
