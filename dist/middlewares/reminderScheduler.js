@@ -14,7 +14,7 @@ const sendReminderEmails = async () => {
     const upComingTask = await TaskModel_1.default.find({
         reminderAt: { $lte: now },
         notified: { $ne: true }
-    }).populate('User');
+    }).populate('user');
     // if (upComingTask.length === 0) {
     //     console.log("No reminders due yet.");
     // }
