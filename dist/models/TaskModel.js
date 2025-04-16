@@ -9,6 +9,8 @@ const TaskSchema = new mongoose_1.default.Schema({
     description: { type: String },
     status: { type: String, enum: ["todo", "in-progress", "done"], default: "todo" },
     user: { type: mongoose_1.default.Schema.Types.ObjectId, ref: "User" },
+    reminderAt: { type: Date, default: null },
+    notified: { type: Boolean, default: false }
 }, { timestamps: true });
 const Task = mongoose_1.default.model("Task", TaskSchema);
 exports.default = Task;

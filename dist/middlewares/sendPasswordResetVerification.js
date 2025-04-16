@@ -26,7 +26,7 @@ const sendPasswordResetEmail = (resetToken, name, email) => {
         },
     });
     const mailOptions = {
-        from: "jayTechsSupport@gmail.com",
+        from: "SupportTeam@gmail.com",
         to: email,
         subject: "To-Do List reset password request",
         html: html,

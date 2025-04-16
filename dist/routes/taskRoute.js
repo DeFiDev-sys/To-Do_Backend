@@ -23,8 +23,18 @@ const GetUserTask = async (req, res) => {
 //create user task
 const CreateUserTask = async (req, res) => {
     try {
+        // const { title,description,status,reminderAt } = req.body
         const task = await TaskModel_1.default.create({ ...req.body, user: req.userId });
-        return res.status(200).json({ message: 'New Task added successfully', task });
+        // const newTask = new Task({
+        //     title,
+        //     description,
+        //     status,
+        //     user:req.userId,
+        //     reminderAt: reminderAt ? new Date(reminderAt) : null,
+        //     notified:false,
+        // })
+        // await newTask.save()
+        return res.status(200).json({ task, message: 'New Task added successfully' });
     }
     catch (error) {
         return res.status(500).json({ message: 'Failed to fetch tasks' });
@@ -33,6 +43,7 @@ const CreateUserTask = async (req, res) => {
 //update user Task
 const UpdateTask = async (req, res) => {
     try {
+        const { title, description, status, reminderAt } = req.body;
         if (!mongoose_1.default.Types.ObjectId.isValid(req.params.id)) {
             return res.status(400).json({ message: "Invalid task ID" });
         }
@@ -40,8 +51,20 @@ const UpdateTask = async (req, res) => {
         if (!existingTask) {
             return res.status(404).json({ message: "Task not found" });
         }
-        const task = await TaskModel_1.default.findByIdAndUpdate(req.params.id, req.body, { new: true }); //note we are req the _id of the task not the user.
-        return res.status(200).json({ message: 'Task updated successfully', task });
+        const task = await TaskModel_1.default.findByIdAndUpdate({ _id: req.params.id, user: req.userId }, {
+            ...(title && { title }),
+            ...(description && { description }),
+            ...(status && { status }),
+            ...(reminderAt !== undefined && { reminderAt: reminderAt ? new Date(reminderAt) : null }),
+            notified: false, // reset notified when reminder is changed
+        }, { new: true }); //note we are req the _id of the task not the user.
+        if (!task) {
+            return res.status(404).json({ message: "Task not found or unauthorized" });
+        }
+        return res.status(200).json({
+            task,
+            message: 'Task updated successfully',
+        });
     }
     catch (error) {
         return res.status(500).json({ message: "Failed to update tasks" });
